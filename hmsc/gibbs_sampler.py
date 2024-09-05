@@ -50,7 +50,7 @@ class GibbsSampler(tf.Module):
         flag_save_eta=True,
         print_debug_flag=False,
         rng_seed=None,
-        dtype=np.float64,
+        dtype=np.float32,
     ):
         print("retracing")        
         if rng_seed != None:

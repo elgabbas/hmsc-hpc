@@ -6,7 +6,7 @@ tfm = tf.math
 tfd = tfp.distributions
 
 @tf_named_func("sigma")
-def updateSigma(params, modelDims, data, priorHyperparameters, dtype=np.float64):
+def updateSigma(params, modelDims, data, priorHyperparameters, dtype=np.float32):
     """Update prior(s) for whole model:
     sigma - residual variance.
 
@@ -63,4 +63,3 @@ def updateSigma(params, modelDims, data, priorHyperparameters, dtype=np.float64)
     sigmaNew = tf.where(indVarSigma, tfm.rsqrt(isigma2), sigma)
 
     return tf.ensure_shape(sigmaNew, [ns])
-

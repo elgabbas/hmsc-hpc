@@ -7,7 +7,7 @@ tfla, tfm, tfr = tf.linalg, tf.math, tf.random
 tfd = tfp.distributions
 
 @tf_named_func("BetaEta")
-def updateBetaEta(params, modelDims, data, priorHyperparams, rLHyperparams, dtype=np.float64):
+def updateBetaEta(params, modelDims, data, priorHyperparams, rLHyperparams, dtype=np.float32):
   Z = params["Z"]
   iD = params["iD"]
   Beta = params["Beta"]
@@ -191,7 +191,7 @@ def updateBetaEta(params, modelDims, data, priorHyperparams, rLHyperparams, dtyp
 # nt = 2
 # nf = 5
 # nv = math.floor(ny/2)
-# dtype = np.float64
+# dtype = np.float32
 # tf.keras.utils.set_random_seed(42)
 
 # Tr = np.random.normal(0, size=[ns,nt]).astype(dtype); Tr[:,0] = 1

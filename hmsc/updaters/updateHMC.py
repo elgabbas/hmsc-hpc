@@ -5,7 +5,7 @@ from hmsc.utils.tf_named_func import tf_named_func
 tfm, tfla, tfd, tfb = tf.math, tf.linalg, tfp.distributions, tfp.bijectors
 
 # @tf.function    # shall be commented for HMSC-HPC run
-def logProb(Beta, Gamma, LiV, sigma, EtaList, LambdaList, DeltaList, Y, X, Tr, Pi, priorHyperparams, rLHyperparams, dtype=np.float64):
+def logProb(Beta, Gamma, LiV, sigma, EtaList, LambdaList, DeltaList, Y, X, Tr, Pi, priorHyperparams, rLHyperparams, dtype=np.float32):
   Mu = tf.matmul(Gamma, Tr, transpose_b=True)
   BM = Beta - Mu
   logDetV = -2*tf.reduce_sum(tfm.log(tfla.diag_part(LiV)))

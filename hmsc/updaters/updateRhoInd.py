@@ -6,7 +6,7 @@ tfla, tfm, tfr = tf.linalg, tf.math, tf.random
 tfd = tfp.distributions
 
 @tf_named_func("rho")
-def updateRhoInd(params, data, priorHyperparams, dtype=np.float64):
+def updateRhoInd(params, data, priorHyperparams, dtype=np.float32):
   """Update rho paramters:
   
   

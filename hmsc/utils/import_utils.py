@@ -5,7 +5,7 @@ from scipy import sparse
 tfla, tfr, tfs, tfm = tf.linalg, tf.random, tf.sparse, tf.math
 
 
-def load_model_data(hmscModel, importedInitParList, dtype=np.float64):
+def load_model_data(hmscModel, importedInitParList, dtype=np.float32):
 
     Y = np.asarray(hmscModel.get("YScaled")).astype(dtype)
     T = np.asarray(hmscModel.get("TrScaled")).astype(dtype)
@@ -85,7 +85,7 @@ def load_model_dims(hmscModel):
     return modelDims
 
 
-def load_model_hyperparams(hmscModel, dataParList, dtype=np.float64):
+def load_model_hyperparams(hmscModel, dataParList, dtype=np.float32):
 
     ns = int(np.squeeze(hmscModel.get("ns")))
 
@@ -102,7 +102,7 @@ def load_model_hyperparams(hmscModel, dataParList, dtype=np.float64):
     return dataParams
 
 
-def load_random_level_hyperparams(hmscModel, dataParList, dtype=np.float64):
+def load_random_level_hyperparams(hmscModel, dataParList, dtype=np.float32):
 
     nr = int(np.squeeze(hmscModel.get("nr")))
     npVec = hmscModel.get("np")
@@ -203,7 +203,7 @@ def load_random_level_hyperparams(hmscModel, dataParList, dtype=np.float64):
     return rLParams
 
 
-def load_prior_hyperparams(hmscModel, dtype=np.float64):
+def load_prior_hyperparams(hmscModel, dtype=np.float32):
 
     mGamma = np.asarray(hmscModel.get("mGamma")).astype(dtype)
     UGamma = np.asarray(hmscModel.get("UGamma")).astype(dtype)
@@ -236,7 +236,7 @@ def load_prior_hyperparams(hmscModel, dtype=np.float64):
     return priorHyperParams
 
 
-def init_params(importedInitParList, modelData, modelDims, rLHyperparams, dtype=np.float64):
+def init_params(importedInitParList, modelData, modelDims, rLHyperparams, dtype=np.float32):
 
     initParList = [None] * len(importedInitParList)
     for chainInd, importedInitPar in enumerate(importedInitParList):

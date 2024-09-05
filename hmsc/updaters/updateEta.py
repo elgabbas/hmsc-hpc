@@ -6,7 +6,7 @@ from hmsc.utils.tf_named_func import tf_named_func
 tfla, tfm, tfr, tfs = tf.linalg, tf.math, tf.random, tf.sparse
 
 @tf_named_func("eta")
-def updateEta(params, modelDims, data, rLHyperparams, dtype=np.float64):
+def updateEta(params, modelDims, data, rLHyperparams, dtype=np.float32):
     """Update conditional updater(s):
     Z - site loadings.
 
@@ -90,7 +90,7 @@ def updateEta(params, modelDims, data, rLHyperparams, dtype=np.float64):
     return EtaListNew
 
 
-def modelNonSpatialCommon(LamInvSigLam, mu0, np, nf, dtype=np.float64):
+def modelNonSpatialCommon(LamInvSigLam, mu0, np, nf, dtype=np.float32):
     # tf.print("using common Eta sampler option")
     iV = tf.eye(nf, dtype=dtype) + LamInvSigLam
     LiV = tfla.cholesky(iV, name="LiV")
@@ -99,7 +99,7 @@ def modelNonSpatialCommon(LamInvSigLam, mu0, np, nf, dtype=np.float64):
     return Eta
   
 
-def modelNonSpatial(LamInvSigLam, mu0, np, nf, dtype=np.float64):
+def modelNonSpatial(LamInvSigLam, mu0, np, nf, dtype=np.float32):
     iV = tf.eye(nf, dtype=dtype) + LamInvSigLam
     LiV = tfla.cholesky(iV, name="LiV")
     # LamInvSigLam_u, LamInvSigLam_id = tf.raw_ops.UniqueV2(x=LamInvSigLam, axis=[0])
@@ -111,7 +111,7 @@ def modelNonSpatial(LamInvSigLam, mu0, np, nf, dtype=np.float64):
     return Eta
 
 
-def modelSpatialFull(LamInvSigLam, mu0, AlphaInd, iWg, np, nf, dtype=np.float64): 
+def modelSpatialFull(LamInvSigLam, mu0, AlphaInd, iWg, np, nf, dtype=np.float32): 
     #TODO a lot of unnecessary tanspositions - rework if considerably affects perfomance
     iWs = tf.reshape(tf.transpose(tfla.diag(tf.transpose(tf.gather(iWg, AlphaInd), [1,2,0])), [2,0,3,1]), [nf*np,nf*np])
     iUEta = iWs + tf.reshape(tf.transpose(tfla.diag(tf.transpose(LamInvSigLam, [1,2,0])), [0,2,1,3]), [nf*np,nf*np])
@@ -151,7 +151,7 @@ def modelSpatialGPP(LamInvSigLam, mu0, AlphaInd, Fg, idDg, idDW12g, nK, nu, nf, 
     return tf.ensure_shape(Eta, [nu,None])
 
 
-def modelSpatialNNGP_scipy(LamInvSigLam, mu0, Alpha, iWList, nu, nf, dtype=np.float64):
+def modelSpatialNNGP_scipy(LamInvSigLam, mu0, Alpha, iWList, nu, nf, dtype=np.float32):
     LamInvSigLam_bdiag = block_diag([LamInvSigLam[i] for i in range(nu)], dtype=dtype)
     dataList, colList, rowList = [None]*int(nf), [None]*int(nf), [None]*int(nf)
     for h, a in enumerate(Alpha):

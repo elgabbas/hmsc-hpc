@@ -4,7 +4,7 @@ from hmsc.utils.tf_named_func import tf_named_func
 tfm, tfla, tfr, tfs = tf.math, tf.linalg, tf.random, tf.sparse
 
 @tf_named_func("alpha")
-def updateAlpha(params, rLHyperparams, dtype=np.float64):
+def updateAlpha(params, rLHyperparams, dtype=np.float32):
     """Update prior(s) for each random level:
     Alpha - scale of site loadings (eta's prior).
 

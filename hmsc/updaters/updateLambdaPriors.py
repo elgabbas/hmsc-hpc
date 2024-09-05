@@ -4,7 +4,7 @@ from hmsc.utils.tf_named_func import tf_named_func
 tfm, tfr = tf.math, tf.random
 
 @tf_named_func("lambdaPriors")
-def updateLambdaPriors(params, rLHyperparams, dtype=np.float64):
+def updateLambdaPriors(params, rLHyperparams, dtype=np.float32):
     """Update prior(s) for each random level:
     Psi - local shrinage species loadings (lambda's prior), and
     Delta - delta global shrinage species loadings (lambda's prior).

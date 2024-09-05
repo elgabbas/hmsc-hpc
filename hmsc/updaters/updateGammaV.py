@@ -7,7 +7,7 @@ tfla, tfm, tfr = tf.linalg, tf.math, tf.random
 tfd = tfp.distributions
 
 @tf_named_func("gammaV")
-def updateGammaV(params, data, priorHyperparams, dtype=np.float64):
+def updateGammaV(params, data, priorHyperparams, dtype=np.float32):
     """Update prior(s) for whole model:
     Gamma - influence of traits on species niches, and
     V - residual covariance of species niches.

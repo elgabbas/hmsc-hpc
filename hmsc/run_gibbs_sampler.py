@@ -20,7 +20,7 @@ from hmsc.utils.import_utils import (
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
 
-def load_params(file_path, dtype=np.float64):
+def load_params(file_path, dtype=np.float32):
     hmscImport, hmscModel = load_model_from_rds(file_path)
     modelDims = load_model_dims(hmscModel)
     modelData = load_model_data(hmscModel, hmscImport.get("initParList"), dtype)
@@ -51,7 +51,7 @@ def run_gibbs_sampler(
     flag_save_eta=True,
     flag_save_postList_to_rds=True,
     flag_profile=False,
-    dtype=np.float64,
+    dtype=np.float32,
 ):
     (
         modelDims,
@@ -250,7 +250,7 @@ if __name__ == "__main__":
     argParser.add_argument(
         "--fp",
         type=int,
-        default=64,
+        default=32,
         choices=[32, 64],
         help="which precision mode is used for sampling: fp32 or fp64",
     )

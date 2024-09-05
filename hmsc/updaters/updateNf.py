@@ -4,8 +4,8 @@ from hmsc.utils.tf_named_func import tf_named_func
 tfm, tfr = tf.math, tf.random
 
 @tf_named_func("nf")
-def updateNf(params, rLHyperparams, it, dtype=np.float64):
-#def updateNf_ml(EtaList, LambdaList, PsiList, DeltaList, iter, rLPar, dtype=np.float64):
+def updateNf(params, rLHyperparams, it, dtype=np.float32):
+#def updateNf_ml(EtaList, LambdaList, PsiList, DeltaList, iter, rLPar, dtype=np.float32):
     """Update latent factors:
     Eta - site loadings,
     Lambda - species loadings,
